@@ -11,12 +11,12 @@ namespace secureFunctions.Functions;
 public static class AdminFunction
 {
     [Function("GlobalAdmin")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous,"GET")] HttpRequestData req,
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous,"DELETE")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-        response.WriteString("Authorized!");
+        response.WriteString("Success!");
         return response;
     }
 }

@@ -7,16 +7,16 @@ namespace secureFunctions.Functions;
 
 [Authorize(
     Scopes = new[] { Scopes.FunctionsAccess },
-    UserRoles = new[] { UserRoles.Moderator })]
+    UserRoles = new[] { UserRoles.Moderator, UserRoles.Admin })]
 public static class ModFunction
 {
     [Function("Moderator")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "GET")] HttpRequestData req,
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "POST")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-        response.WriteString("Authorized!");
+        response.WriteString("Success!");
         return response;
     }
 }

@@ -10,6 +10,8 @@
         <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.8.0" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.12" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.7.0" />
+        <PackageReference Include="Dapper" Version="2.0.123" />
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
         <PackageReference Include="Microsoft.IdentityModel" Version="7.0.0" />
         <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.31.0" />
         <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.31.0" />
