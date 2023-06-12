@@ -10,8 +10,8 @@ namespace secureFunctions.Functions;
     UserRoles = new[] { UserRoles.User })]
 public static class UserFunction
 {
-    [Function("UserFunction")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "GET")] HttpRequestData req,
+    [Function("User")]
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "GET")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
