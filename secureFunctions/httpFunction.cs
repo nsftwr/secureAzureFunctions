@@ -1,0 +1,18 @@
+﻿using System.Net;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+
+namespace secureFunctions;
+
+public static class HttpFunction
+{
+    [Function("httpFunction")]
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "GET")] HttpRequestData req,
+        FunctionContext executionContext)
+    {
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+        response.WriteString("Welcome to Azure Functions!");
+        return response;
+    }
+}
