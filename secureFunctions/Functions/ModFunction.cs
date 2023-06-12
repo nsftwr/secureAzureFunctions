@@ -1,12 +1,16 @@
 ﻿using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using secureFunctions.Authorization;
 
 namespace secureFunctions.Functions;
 
-public static class HttpFunction
+[Authorize(
+    Scopes = new[] { Scopes.FunctionsAccess },
+    UserRoles = new[] { UserRoles.Moderator })]
+public static class ModFunction
 {
-    [Function("httpFunction")]
+    [Function("ModFunction")]
     public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "GET")] HttpRequestData req,
         FunctionContext executionContext)
     {
