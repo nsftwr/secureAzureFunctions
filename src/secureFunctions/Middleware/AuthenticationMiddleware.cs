@@ -23,7 +23,8 @@ namespace secureFunctions.Middleware
             _tokenValidator = new JwtSecurityTokenHandler();
             _tokenValidationParameters = new TokenValidationParameters
             {
-                ValidAudience = audience
+                ValidAudience = audience,
+                ClockSkew = TimeSpan.Zero
             };
             _configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
                 $"{authority}/.well-known/openid-configuration",
