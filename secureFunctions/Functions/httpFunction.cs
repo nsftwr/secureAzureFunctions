@@ -2,7 +2,7 @@
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
-namespace secureFunctions;
+namespace secureFunctions.Functions;
 
 public static class HttpFunction
 {
