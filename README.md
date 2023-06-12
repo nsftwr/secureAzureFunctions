@@ -14,7 +14,7 @@ DISCLAIMER: This is not my code. All credit goes [juunas11](https://github.com/j
 }
 ```
 
-`Powershell commands to aquire JWT`
+`Powershell commands to acquire JWT`
 
 ```ps
 az login --scope api://your-aad-client-id/user_impersonation --tenant your-aad-tenant-id
