@@ -1,6 +1,8 @@
 DISCLAIMER: This is not my code. All credit goes [juunas11](https://github.com/juunas11) & repo [IsolatedFunctionsAuthentication](https://github.com/juunas11/IsolatedFunctionsAuthentication).
 
-Instructions:
+[TOC]
+
+# Instructions:
 
 1. Log into Azure and go to Active Directory
 
@@ -64,3 +66,52 @@ If you're using an expired token you will receive a 401.
 ![Alt text](attachments/image-10.png)
 
 Now your Azure Functions are secured with Azure Active Directory Application roles.
+
+<hr>
+
+Additinally, you can use Azure Functions to be the middleman between an enduser and data by securing who can access what.
+
+For this example an Azure SQL database will be provisioned with the following table
+
+```sql
+CREATE TABLE secfunc
+(
+  "Id" int IDENTITY(1,1) PRIMARY KEY,
+  "Value" varchar(1028)
+)
+```
+
+First and foremost, to allow the function to be used to access the SQL server, the function app needs to have an System assigned identity. That can be done under the 'Identity' tab for the Azure Function resource provisioned.
+
+![Alt text](attachments/image-12.png)
+
+Once that has been turned on, log onto the SQL server and add the function app identity to the database users
+
+```sql
+CREATE USER [nsftwr-sec-func] FROM EXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER [nsftwr-sec-func];
+ALTER ROLE db_datawriter ADD MEMBER [nsftwr-sec-func];
+```
+
+You can check if it was successful by entering this command
+
+```sql
+SELECT name AS username,
+       create_date,
+       modify_date,
+       type_desc AS type,
+       authentication_type_desc AS authentication_type
+FROM sys.database_principals
+WHERE type NOT IN ('A', 'G', 'R', 'X')
+  AND sid IS NOT NULL
+  AND name != 'guest'
+ORDER BY username;
+```
+
+![Alt text](attachments/image-13.png)
+
+Finally, the UserFunction returns the database entries in a JSON object.
+
+![Alt text](attachments/image-14.png)
+
+# How it works in a nutshell
